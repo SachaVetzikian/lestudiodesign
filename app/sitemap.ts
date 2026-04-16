@@ -14,7 +14,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/services/audit-cro", changeFrequency: "monthly", priority: 0.9 },
     { path: "/services/refonte-ux-ui", changeFrequency: "monthly", priority: 0.9 },
     { path: "/services/optimisation-cro", changeFrequency: "monthly", priority: 0.9 },
-    { path: "/audit-cro", changeFrequency: "monthly", priority: 0.9 },
+
+    { path: "/e-commerce", changeFrequency: "monthly", priority: 0.85 },
+    { path: "/audit-ux-design", changeFrequency: "monthly", priority: 0.85 },
+    { path: "/audit-site-e-commerce", changeFrequency: "monthly", priority: 0.85 },
+    { path: "/refonte-site-e-commerce", changeFrequency: "monthly", priority: 0.85 },
+    { path: "/audit-cro", changeFrequency: "monthly", priority: 0.85 },
 
     { path: "/cas-etudes", changeFrequency: "weekly", priority: 0.8 },
     { path: "/cas-etudes/cuure", changeFrequency: "monthly", priority: 0.8 },

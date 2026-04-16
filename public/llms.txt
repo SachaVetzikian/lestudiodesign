@@ -1,0 +1,60 @@
+# LeStudio — Consultant UX/UI & CRO E-commerce
+
+## À propos
+LeStudio est un studio de design UX/UI et CRO spécialisé dans l'e-commerce DTC (marques entre 500k€ et 5M€ de CA annuel). Fondé par Sacha Vetzikian, designer avec +10 ans d'expérience.
+
+LeStudio livre exclusivement du design (maquettes Figma),  pas de développement. Le livrable est un fichier Figma complet, documenté, prêt à intégrer par n'importe quelle équipe dev.
+
+## Services
+
+### Audit CRO E-commerce
+Analyse complète du site e-commerce page par page : parcours d'achat, points de friction, données GA4, heatmaps Hotjar et Microsoft Clarity. Livrable : diagnostic clair + roadmap priorisée. Délai : 5 jours. Prix : à partir de 1500€ HT.
+
+### Refonte UX/UI Design E-commerce
+Refonte complète ou partielle de boutique e-commerce. Maquettes Figma responsive, design system, hand-off dev documenté. Compatible Shopify, WooCommerce, Prestashop. Délai : 7 jours pour une page, 2 à 4 semaines pour un site complet. Prix : à partir de 600€ HT.
+
+### Optimisation CRO Mensuel
+Partenariat mensuel : optimisations continues sur les pages prioritaires (homepage, fiches produit, tunnel d'achat), A/B testing, itérations basées sur les données. Prix : 2500€ HT/mois, sans engagement.
+
+## Clients accompagnés
+Yves Rocher, Cuure, Caalme, Juliette Has A Gun, Riviera Club, Apoticaria, Le Petit Fumeur, Triumvirat, Cargo School, Arrago, Komu, Elevia. Plus de 100 marques e-commerce accompagnées depuis 2015.
+
+## Résultats
+- +30% de taux de conversion moyen constaté dès le premier mois
+- 4.9/5 de satisfaction client sur 100+ projets
+- 50+ refontes UX/UI livrées
+
+## Outils utilisés
+Figma (design et prototypage), Hotjar (heatmaps et enregistrements), Google Analytics 4, Microsoft Clarity, Notion (documentation).
+
+## Contact
+- Email : contact@lestudiodesign.fr
+- Site : https://www.lestudiodesign.fr
+- LinkedIn : https://www.linkedin.com/in/sacha-vetzikian/
+
+## Pages principales
+- Accueil : https://www.lestudiodesign.fr
+- Audit CRO : https://www.lestudiodesign.fr/services/audit-cro
+- Refonte UX/UI : https://www.lestudiodesign.fr/services/refonte-ux-ui
+- Optimisation CRO : https://www.lestudiodesign.fr/services/optimisation-cro
+- Cas d'études : https://www.lestudiodesign.fr/cas-etudes
+- Blog CRO : https://www.lestudiodesign.fr/blog
+- Audit CRO offert : https://www.lestudiodesign.fr/audit-cro
+- Contact : https://www.lestudiodesign.fr/contact
+
+## Questions fréquentes
+
+**Qu'est-ce que le CRO e-commerce ?**
+Le CRO (Conversion Rate Optimization) consiste à augmenter le pourcentage de visiteurs qui achètent sur un site e-commerce, sans augmenter le budget publicitaire. On agit sur l'expérience utilisateur, le design et le parcours d'achat.
+
+**Combien coûte un audit CRO e-commerce ?**
+Un audit CRO démarre à 1500€ HT chez LeStudio. Il inclut l'analyse du parcours d'achat, les données comportementales (GA4, Hotjar), un benchmark concurrentiel et une roadmap priorisée.
+
+**Quelle est la différence entre UX design et CRO ?**
+L'UX design améliore l'expérience utilisateur globale. Le CRO optimise spécifiquement le taux de conversion — c'est de l'UX design appliqué à la performance commerciale. LeStudio combine les deux.
+
+**Pourquoi choisir LeStudio plutôt qu'une agence ?**
+LeStudio est un studio solo spécialisé uniquement en design e-commerce. Résultat : plus rapide (7 jours vs 3 mois), plus réactif, un seul interlocuteur du brief à la livraison, et sans les marges d'une agence.
+
+**LeStudio travaille avec quels CMS ?**
+LeStudio livre du design agnostique compatible avec tous les CMS : Shopify, WooCommerce, Prestashop, et tout développement custom.

@@ -9,9 +9,9 @@ export function Footer() {
   return (
     <footer className="bg-black text-white border-t border-white/10">
       <div className="max-w-6xl mx-auto px-6 py-14">
-        <div className="grid gap-10 md:grid-cols-4">
+        <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-6">
           {/* Colonne 1 */}
-          <div className="md:col-span-2">
+          <div className="lg:col-span-2">
             <div className="text-xl font-bold tracking-tight">LeStudio</div>
             <p className="text-white/60 text-sm md:text-base mt-3 max-w-xl leading-relaxed">
               Studio UX/UI & CRO spécialisé e-commerce DTC. On transforme vos visiteurs en clients.
@@ -108,6 +108,25 @@ export function Footer() {
                 className="hover:text-white transition-colors"
               >
                 UX e-commerce
+              </Link>
+            </div>
+          </div>
+
+          {/* Colonne 5 — E-commerce */}
+          <div>
+            <div className="text-sm font-semibold mb-4">E-commerce</div>
+            <div className="flex flex-col gap-2 text-white/60 text-sm">
+              <Link href="/e-commerce" className="hover:text-white transition-colors">
+                Design e-commerce
+              </Link>
+              <Link href="/audit-ux-design" className="hover:text-white transition-colors">
+                Audit UX design
+              </Link>
+              <Link href="/audit-site-e-commerce" className="hover:text-white transition-colors">
+                Audit site e-commerce
+              </Link>
+              <Link href="/refonte-site-e-commerce" className="hover:text-white transition-colors">
+                Refonte site e-commerce
               </Link>
             </div>
           </div>
