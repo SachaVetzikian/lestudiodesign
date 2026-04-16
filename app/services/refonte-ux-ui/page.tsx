@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Navbar } from "@/app/components/Navbar";
 
 export const metadata: Metadata = {
   title: "Refonte UX/UI e-commerce — Design Figma livré en 7 jours | LeStudio",
@@ -6,7 +7,6 @@ export const metadata: Metadata = {
     "Refonte UX/UI e-commerce : maquettes Figma livrées en 7 jours, design system, et hand-off dev. Conçu pour améliorer la conversion dès l’expérience utilisateur.",
 };
 
-const SITE_NAME = "LeStudio";
 const CONTACT_EMAIL = "contact@lestudiodesign.fr";
 
 const faq = [
@@ -52,35 +52,7 @@ const faqSchema = {
 export default function RefonteUxUiPage() {
   return (
     <main className="bg-white text-black font-sans antialiased overflow-x-hidden">
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-b border-black/10">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="/" className="text-xl font-bold tracking-tight" aria-label={SITE_NAME}>
-            LeStudio
-          </a>
-
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium">
-            <a href="/#realisations" className="hover:opacity-60 transition-opacity">
-              Réalisations
-            </a>
-            <a href="/#services" className="hover:opacity-60 transition-opacity">
-              Services
-            </a>
-            <a href="/#tarifs" className="hover:opacity-60 transition-opacity">
-              Tarifs
-            </a>
-            <a href="/#blog" className="hover:opacity-60 transition-opacity">
-              Blog
-            </a>
-          </div>
-
-          <a
-            href="#cta"
-            className="hidden md:inline-flex bg-black text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-black/80 transition-colors"
-          >
-            Audit CRO offert
-          </a>
-        </div>
-      </nav>
+      <Navbar />
 
       <section className="pt-28 pb-16 px-6 max-w-6xl mx-auto">
         <div className="max-w-3xl">

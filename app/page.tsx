@@ -1,6 +1,7 @@
 ﻿"use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Navbar } from "@/app/components/Navbar";
 
 const clientLogos = [
   "Yves Rocher",
@@ -131,18 +132,9 @@ const arguments_ = [
 ];
 
 export default function Home() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
   const marqueeInnerRef = useRef<HTMLDivElement>(null);
   const singleWidthRef = useRef(0);
   const offsetRef = useRef(0);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     const measure = () => {
@@ -184,75 +176,7 @@ export default function Home() {
 
   return (
     <main className="bg-white text-black font-sans antialiased overflow-x-hidden">
-      {/* Navbar */}
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-white/95 backdrop-blur border-b border-black/10"
-            : "bg-transparent"
-        }`}
-      >
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="/" className="text-xl font-bold tracking-tight" aria-label="LeStudio">
-            LeStudio
-          </a>
-
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium">
-            <a href="#realisations" className="hover:opacity-60 transition-opacity">
-              Réalisations
-            </a>
-            <a href="#services" className="hover:opacity-60 transition-opacity">
-              Services
-            </a>
-            <a href="#services" className="hover:opacity-60 transition-opacity">
-              Tarifs
-            </a>
-            <a href="#blog" className="hover:opacity-60 transition-opacity">
-              Blog
-            </a>
-          </div>
-
-          <a
-            href="#audit"
-            className="hidden md:inline-flex bg-black text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-black/80 transition-colors"
-          >
-            Audit CRO offert
-          </a>
-
-          <button
-            type="button"
-            className="md:hidden"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Ouvrir le menu"
-          >
-            <span className="text-2xl">{menuOpen ? "✕" : "☰"}</span>
-          </button>
-        </div>
-
-        {menuOpen && (
-          <div className="md:hidden bg-white border-t border-black/10 px-6 py-4 flex flex-col gap-4 text-sm font-medium">
-            <a href="#realisations" onClick={() => setMenuOpen(false)} className="hover:opacity-70 transition-opacity">
-              Réalisations
-            </a>
-            <a href="#services" onClick={() => setMenuOpen(false)} className="hover:opacity-70 transition-opacity">
-              Services
-            </a>
-            <a href="#services" onClick={() => setMenuOpen(false)} className="hover:opacity-70 transition-opacity">
-              Tarifs
-            </a>
-            <a href="#blog" onClick={() => setMenuOpen(false)} className="hover:opacity-70 transition-opacity">
-              Blog
-            </a>
-            <a
-              href="#audit"
-              onClick={() => setMenuOpen(false)}
-              className="bg-black text-white px-5 py-2.5 rounded-full text-center"
-            >
-              Audit CRO offert
-            </a>
-          </div>
-        )}
-      </nav>
+      <Navbar />
 
       {/* Hero */}
       <section className="pt-32 pb-20 px-6 max-w-6xl mx-auto">

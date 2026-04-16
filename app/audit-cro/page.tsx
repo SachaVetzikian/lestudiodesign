@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AuditCroLeadForm } from "./AuditCroLeadForm";
+import { Navbar } from "@/app/components/Navbar";
 
 export const metadata: Metadata = {
   title: "Audit CRO e-commerce offert — LeStudio",
@@ -31,19 +32,7 @@ export default function AuditCroLeadPage() {
 
   return (
     <main className="bg-white text-black font-sans antialiased overflow-x-hidden">
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-b border-black/10">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="/" className="text-xl font-bold tracking-tight" aria-label="LeStudio">
-            LeStudio
-          </a>
-          <a
-            href="#form"
-            className="hidden md:inline-flex bg-black text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-black/80 transition-colors"
-          >
-            Obtenir mon audit gratuit
-          </a>
-        </div>
-      </nav>
+      <Navbar />
 
       <section className="pt-28 pb-12 px-6 max-w-6xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-10 items-start">
@@ -101,7 +90,7 @@ export default function AuditCroLeadPage() {
                 Obtenir mon audit gratuit
               </a>
               <a
-                href="/realisations"
+                href="/cas-etudes"
                 className="border border-black/20 font-semibold px-7 py-4 rounded-full hover:bg-black/5 transition-colors text-center"
               >
                 Voir des réalisations

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import { Navbar } from "@/app/components/Navbar";
 
 export const metadata: Metadata = {
-  title: "Réalisations E-commerce — Refontes UX/UI & CRO | LeStudio",
+  title: "Cas d'études E-commerce — Refontes UX/UI & CRO | LeStudio",
   description:
-    "Réalisations e-commerce : refonte UX UI e-commerce, design Figma et CRO. Découvrez nos cas clients DTC et les projets réalisés.",
+    "Cas d'études e-commerce : refonte UX UI e-commerce, design Figma et CRO. Découvrez nos cas clients DTC et les projets réalisés.",
 };
 
 const SITE_URL = "https://lestudiodesign.fr";
@@ -60,42 +61,14 @@ const itemListSchema = {
     "@type": "ListItem",
     position: index + 1,
     name: c.name,
-    url: `${SITE_URL}/realisations${c.href}`,
+    url: `${SITE_URL}/cas-etudes${c.href}`,
   })),
 };
 
-export default function RealisationsPage() {
+export default function CaseStudiesPage() {
   return (
     <main className="bg-white text-black font-sans antialiased overflow-x-hidden">
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-b border-black/10">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="/" className="text-xl font-bold tracking-tight" aria-label="LeStudio">
-            LeStudio
-          </a>
-
-          <div className="hidden md:flex items-center gap-8 text-sm font-medium">
-            <a href="/realisations" className="hover:opacity-60 transition-opacity">
-              Réalisations
-            </a>
-            <a href="/#services" className="hover:opacity-60 transition-opacity">
-              Services
-            </a>
-            <a href="/#tarifs" className="hover:opacity-60 transition-opacity">
-              Tarifs
-            </a>
-            <a href="/#blog" className="hover:opacity-60 transition-opacity">
-              Blog
-            </a>
-          </div>
-
-          <a
-            href="/#audit"
-            className="hidden md:inline-flex bg-black text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-black/80 transition-colors"
-          >
-            Audit CRO offert
-          </a>
-        </div>
-      </nav>
+      <Navbar />
 
       <section className="pt-28 pb-10 px-6 max-w-6xl mx-auto">
         <div className="max-w-3xl">
@@ -103,7 +76,7 @@ export default function RealisationsPage() {
             Refonte UX UI e-commerce
           </p>
           <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.05]">
-            Réalisations E-commerce — Refontes UX/UI & CRO
+            Cas d&apos;études E-commerce — Refontes UX/UI & CRO
           </h1>
           <p className="text-lg md:text-xl text-black/60 mt-5 leading-relaxed">
             Une sélection de projets réalisés pour des marques DTC : refonte UX UI
