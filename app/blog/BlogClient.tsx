@@ -7,6 +7,8 @@ import { useMemo, useState } from "react";
 import type { BlogCategory, BlogPost } from "./_shared";
 import { catColor, catTint, formatDate } from "./_shared";
 
+export type { BlogPost };
+
 const FILTERS: Array<"Tous" | BlogCategory> = [
   "Tous",
   "CRO",
