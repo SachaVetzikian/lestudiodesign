@@ -1,0 +1,257 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Optimisation CRO e-commerce — Abonnement mensuel | LeStudio",
+  description:
+    "Optimisation CRO e-commerce en abonnement mensuel : itérations continues, A/B testing, optimisation des fiches produit et du tunnel d'achat pour augmenter la conversion.",
+};
+
+const SITE_NAME = "LeStudio";
+const CONTACT_EMAIL = "contact@lestudiodesign.fr";
+
+const faq = [
+  {
+    q: "Qu’est-ce que l’optimisation CRO e-commerce en abonnement ?",
+    a: "C’est une collaboration mensuelle pour améliorer en continu votre taux de conversion : hypothèses, priorisation, tests (A/B testing), itérations design et recommandations actionnables.",
+  },
+  {
+    q: "Que comprend l’abonnement ?",
+    a: "L’optimisation CRO e-commerce inclut la priorisation des actions, l’optimisation des fiches produit, du tunnel d’achat, des landing pages clés et des recommandations basées sur les données et retours utilisateurs.",
+  },
+  {
+    q: "Faites-vous de l’A/B testing ?",
+    a: "Oui, lorsque votre stack le permet. Nous définissons les hypothèses, les variantes, et les métriques, puis nous analysons les résultats pour itérer.",
+  },
+  {
+    q: "Quel est le tarif ?",
+    a: "Le tarif est de 2000€/mois.",
+  },
+  {
+    q: "Combien de temps faut-il pour voir des résultats ?",
+    a: "Les résultats dépendent du trafic, du funnel et du volume de conversions, mais l’objectif est de générer des gains visibles au fil des itérations mensuelles.",
+  },
+  {
+    q: "Comment démarrer ?",
+    a: "Cliquez sur “Démarrer” et envoyez votre site + vos objectifs. Nous revenons vers vous avec les prochaines étapes.",
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a,
+    },
+  })),
+};
+
+export default function OptimisationCroPage() {
+  return (
+    <main className="bg-white text-black font-sans antialiased overflow-x-hidden">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur border-b border-black/10">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+          <a href="/" className="text-xl font-bold tracking-tight" aria-label={SITE_NAME}>
+            LeStudio
+          </a>
+
+          <div className="hidden md:flex items-center gap-8 text-sm font-medium">
+            <a href="/#realisations" className="hover:opacity-60 transition-opacity">
+              Réalisations
+            </a>
+            <a href="/#services" className="hover:opacity-60 transition-opacity">
+              Services
+            </a>
+            <a href="/#tarifs" className="hover:opacity-60 transition-opacity">
+              Tarifs
+            </a>
+            <a href="/#blog" className="hover:opacity-60 transition-opacity">
+              Blog
+            </a>
+          </div>
+
+          <a
+            href="#cta"
+            className="hidden md:inline-flex bg-black text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-black/80 transition-colors"
+          >
+            Démarrer
+          </a>
+        </div>
+      </nav>
+
+      <section className="pt-28 pb-16 px-6 max-w-6xl mx-auto">
+        <div className="max-w-3xl">
+          <p className="text-sm font-semibold uppercase tracking-widest text-black/40 mb-4">
+            Optimisation CRO e-commerce
+          </p>
+
+          <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.05]">
+            Optimisation CRO E-commerce — Abonnement mensuel
+          </h1>
+
+          <p className="text-lg md:text-xl text-black/60 mt-5 leading-relaxed">
+            L’optimisation CRO e-commerce est un travail d’itération continue :
+            on mesure, on teste, on améliore. Objectif : augmenter la conversion
+            sur vos pages à fort impact (fiches produit, tunnel d’achat, pages
+            d’atterrissage), sans improviser.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-3 mt-7">
+            <a
+              href="#cta"
+              className="bg-black text-white font-semibold px-7 py-4 rounded-full hover:bg-black/80 transition-colors text-center"
+            >
+              Démarrer
+            </a>
+            <a
+              href="#faq"
+              className="border border-black/20 font-semibold px-7 py-4 rounded-full hover:bg-black/5 transition-colors text-center"
+            >
+              Voir la FAQ
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 pb-16 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-6 items-start">
+          <div className="rounded-2xl border border-black/10 bg-white p-7">
+            <h2 className="text-2xl md:text-3xl font-bold">Ce qui est inclus</h2>
+            <p className="text-black/60 text-sm md:text-base mt-3 leading-relaxed">
+              Un abonnement mensuel orienté performance. On travaille en cycles
+              courts pour améliorer les pages qui génèrent le plus de revenus.
+            </p>
+
+            <div className="mt-6 grid sm:grid-cols-2 gap-3">
+              {[
+                "A/B testing",
+                "Fiches produit",
+                "Tunnel d'achat",
+                "Priorisation & itérations",
+              ].map((t) => (
+                <div
+                  key={t}
+                  className="rounded-xl border border-black/10 px-4 py-3 text-sm font-semibold text-black/80"
+                >
+                  {t}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-black/10 bg-black text-white p-7">
+            <h2 className="text-2xl md:text-3xl font-bold">Cadence mensuelle</h2>
+            <ul className="mt-4 space-y-3 text-white/70 text-sm md:text-base">
+              <li className="flex gap-3">
+                <span className="font-bold text-white">✓</span>
+                Hypothèses et priorisation (impact x effort)
+              </li>
+              <li className="flex gap-3">
+                <span className="font-bold text-white">✓</span>
+                Conception des variantes (UX/UI)
+              </li>
+              <li className="flex gap-3">
+                <span className="font-bold text-white">✓</span>
+                Mise en place / suivi des tests (selon stack)
+              </li>
+              <li className="flex gap-3">
+                <span className="font-bold text-white">✓</span>
+                Analyse et itérations pour le prochain cycle
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="px-6 pb-16 max-w-6xl mx-auto">
+        <div className="mb-10">
+          <p className="text-sm font-semibold uppercase tracking-widest text-black/40 mb-3">
+            Tarif
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold">
+            2000€/mois
+          </h2>
+        </div>
+
+        <div className="rounded-2xl border border-black/10 bg-white p-8">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+              <h3 className="text-xl font-bold">Optimisation CRO e-commerce</h3>
+              <p className="text-black/60 text-sm mt-2 leading-relaxed max-w-2xl">
+                Abonnement mensuel pour optimiser la conversion avec des cycles
+                de tests, d’itérations UX/UI et d’améliorations ciblées sur vos
+                pages à fort impact.
+              </p>
+            </div>
+            <div className="shrink-0">
+              <div className="text-3xl font-bold">2000€</div>
+              <div className="text-black/50 text-sm">/ mois</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" className="px-6 pb-16 max-w-6xl mx-auto">
+        <div className="mb-10">
+          <p className="text-sm font-semibold uppercase tracking-widest text-black/40 mb-3">
+            FAQ
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold">
+            Questions fréquentes sur l’optimisation CRO e-commerce
+          </h2>
+        </div>
+
+        <div className="rounded-2xl border border-black/10 bg-white p-7">
+          <div className="space-y-6">
+            {faq.map((item) => (
+              <div key={item.q} className="pt-2">
+                <h3 className="font-bold text-lg">{item.q}</h3>
+                <p className="text-black/60 text-sm md:text-base mt-2 leading-relaxed">
+                  {item.a}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      </section>
+
+      <section id="cta" className="px-6 pb-20 max-w-6xl mx-auto">
+        <div className="rounded-2xl bg-black text-white p-8 md:p-12 text-center">
+          <h2 className="text-3xl md:text-5xl font-bold">Démarrer</h2>
+          <p className="text-white/60 text-lg mt-4 max-w-2xl mx-auto leading-relaxed">
+            Lancez votre optimisation CRO e-commerce. Envoyez votre site et vos
+            objectifs : on revient avec un plan d’action et la cadence du premier mois.
+          </p>
+
+          <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+            <a
+              href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(
+                "Optimisation CRO e-commerce — démarrage"
+              )}&body=${encodeURIComponent(
+                "Bonjour,\n\nJe souhaite démarrer une optimisation CRO e-commerce (abonnement mensuel).\n\nLien de mon site : \nObjectif principal : \nStack / outils (si applicable) : \n\nMerci."
+              )}`}
+              className="bg-white text-black font-bold px-10 py-5 rounded-full hover:bg-white/90 transition-colors inline-block text-lg"
+            >
+              Démarrer
+            </a>
+            <a
+              href="/"
+              className="border border-white/20 text-white font-semibold px-10 py-5 rounded-full hover:bg-white/5 transition-colors inline-block text-lg"
+            >
+              Voir LeStudio
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
