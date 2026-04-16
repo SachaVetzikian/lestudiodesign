@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/app/components/Navbar";
-import { BlogClient, type BlogPost } from "./BlogClient";
+import { Footer } from "@/app/components/Footer";
+import { BlogClient } from "./BlogClient";
+import type { BlogPost } from "./_shared";
 
 export const metadata: Metadata = {
   title: "Blog CRO & UX e-commerce | LeStudio",
@@ -125,6 +127,7 @@ export default function BlogPage() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       ))}
+      <Footer />
     </main>
   );
 }

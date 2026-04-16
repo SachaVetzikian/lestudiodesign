@@ -1,6 +1,7 @@
-"use client";
+'use client';
 
 import Link from "next/link";
+import { ArrowRight, CaretDown, List, X } from "@phosphor-icons/react";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 
 type NavItem = { label: string; href: string };
@@ -73,9 +74,12 @@ export function Navbar() {
               onFocus={() => setServicesOpen(true)}
             >
               Services
-              <span className={`text-xs transition-transform ${servicesOpen ? "rotate-180" : ""}`}>
-                ▾
-              </span>
+              <CaretDown
+                size={16}
+                weight="regular"
+                className={`transition-transform ${servicesOpen ? "rotate-180" : ""}`}
+                aria-hidden="true"
+              />
             </button>
 
             {servicesOpen && (
@@ -95,7 +99,7 @@ export function Navbar() {
                     onClick={() => setServicesOpen(false)}
                   >
                     <span className="font-semibold text-black/80">{item.label}</span>
-                    <span className="text-black/30">→</span>
+                    <ArrowRight size={16} weight="regular" className="text-black/30" aria-hidden="true" />
                   </Link>
                 ))}
               </div>
@@ -112,7 +116,7 @@ export function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           <Link
             href="/audit-cro"
-            className="inline-flex bg-black text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-black/80 transition-colors"
+            className="btn-primary text-sm"
           >
             Audit CRO offert
           </Link>
@@ -125,7 +129,11 @@ export function Navbar() {
           aria-label={mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
           onClick={() => setMobileOpen((v) => !v)}
         >
-          <span className="text-2xl">{mobileOpen ? "✕" : "☰"}</span>
+          {mobileOpen ? (
+            <X size={28} weight="regular" aria-hidden="true" />
+          ) : (
+            <List size={28} weight="regular" aria-hidden="true" />
+          )}
         </button>
       </div>
 
@@ -139,9 +147,12 @@ export function Navbar() {
               aria-expanded={servicesMobileOpen}
             >
               <span>Services</span>
-              <span className={`text-xs transition-transform ${servicesMobileOpen ? "rotate-180" : ""}`}>
-                ▾
-              </span>
+              <CaretDown
+                size={16}
+                weight="regular"
+                className={`transition-transform ${servicesMobileOpen ? "rotate-180" : ""}`}
+                aria-hidden="true"
+              />
             </button>
 
             {servicesMobileOpen && (
@@ -186,7 +197,7 @@ export function Navbar() {
 
             <Link
               href="/audit-cro"
-              className="mt-2 bg-black text-white px-5 py-3 rounded-full text-center font-semibold hover:bg-black/80 transition-colors"
+              className="mt-2 btn-primary w-full"
               onClick={() => setMobileOpen(false)}
             >
               Audit CRO offert

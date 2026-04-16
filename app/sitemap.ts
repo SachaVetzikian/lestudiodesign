@@ -1,44 +1,39 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://www.lestudiodesign.fr'
+  const baseUrl = "https://www.lestudiodesign.fr";
+  const lastModified = new Date();
 
-  return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/cas-etudes`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/services`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/audit-cro`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-  ]
+  const urls: Array<{
+    path: string;
+    changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
+    priority: number;
+  }> = [
+    { path: "/", changeFrequency: "weekly", priority: 1.0 },
+
+    { path: "/services/audit-cro", changeFrequency: "monthly", priority: 0.9 },
+    { path: "/services/refonte-ux-ui", changeFrequency: "monthly", priority: 0.9 },
+    { path: "/services/optimisation-cro", changeFrequency: "monthly", priority: 0.9 },
+    { path: "/audit-cro", changeFrequency: "monthly", priority: 0.9 },
+
+    { path: "/cas-etudes", changeFrequency: "weekly", priority: 0.8 },
+    { path: "/cas-etudes/cuure", changeFrequency: "monthly", priority: 0.8 },
+    { path: "/cas-etudes/caalme", changeFrequency: "monthly", priority: 0.8 },
+    { path: "/cas-etudes/juliette-has-a-gun", changeFrequency: "monthly", priority: 0.8 },
+    { path: "/cas-etudes/apoticaria", changeFrequency: "monthly", priority: 0.8 },
+    { path: "/cas-etudes/riviera-club", changeFrequency: "monthly", priority: 0.8 },
+    { path: "/cas-etudes/yves-rocher", changeFrequency: "monthly", priority: 0.8 },
+
+    { path: "/blog", changeFrequency: "weekly", priority: 0.8 },
+    { path: "/blog/audit-cro-ecommerce-guide-complet", changeFrequency: "monthly", priority: 0.8 },
+
+    { path: "/agence", changeFrequency: "monthly", priority: 0.6 },
+  ];
+
+  return urls.map((u) => ({
+    url: u.path === "/" ? baseUrl : `${baseUrl}${u.path}`,
+    lastModified,
+    changeFrequency: u.changeFrequency,
+    priority: u.priority,
+  }));
 }

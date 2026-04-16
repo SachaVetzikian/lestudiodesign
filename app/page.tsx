@@ -1,7 +1,152 @@
 ﻿"use client";
 
-import { useEffect, useRef, useState } from "react";
+import { animate, motion, useInView } from "framer-motion";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Navbar } from "@/app/components/Navbar";
+import { Footer } from "@/app/components/Footer";
+import {
+  ArrowRight,
+  ChartLine,
+  Check,
+  FigmaLogo,
+  MagnifyingGlass,
+  Question,
+  ShoppingCart,
+  Strategy,
+  TrendUp,
+} from "@phosphor-icons/react";
+
+const EASE_OUT = [0.16, 1, 0.3, 1] as const;
+
+function FadeUp({
+  children,
+  delay = 0,
+  className,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) {
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: EASE_OUT, delay }}
+      viewport={{ once: true, amount: 0.25 }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+const STAGGER_CONTAINER = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1 } },
+};
+
+const STAGGER_ITEM = {
+  hidden: { opacity: 0, y: 24 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE_OUT } },
+};
+
+function CountUp({
+  value,
+  decimals = 0,
+  prefix = "",
+  suffix = "",
+  className,
+}: {
+  value: number;
+  decimals?: number;
+  prefix?: string;
+  suffix?: string;
+  className?: string;
+}) {
+  const ref = useRef<HTMLSpanElement | null>(null);
+  const inView = useInView(ref, { once: true, amount: 0.6 });
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    const controls = animate(0, value, {
+      duration: 0.9,
+      ease: EASE_OUT,
+      onUpdate: (latest) => {
+        const factor = Math.pow(10, decimals);
+        setDisplay(Math.round(latest * factor) / factor);
+      },
+    });
+    return () => controls.stop();
+  }, [inView, value, decimals]);
+
+  return (
+    <span ref={ref} className={className}>
+      {prefix}
+      {display.toFixed(decimals)}
+      {suffix}
+    </span>
+  );
+}
+
+function CustomCursor() {
+  const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [visible, setVisible] = useState(false);
+  const [hovering, setHovering] = useState(false);
+
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      setVisible(true);
+      setPos({ x: e.clientX, y: e.clientY });
+    };
+
+    const onOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target) return;
+      const interactive = target.closest("a,button");
+      setHovering(Boolean(interactive));
+    };
+
+    const onLeave = () => {
+      setVisible(false);
+      setHovering(false);
+    };
+
+    window.addEventListener("mousemove", onMove, { passive: true });
+    document.addEventListener("mouseover", onOver, true);
+    window.addEventListener("mouseleave", onLeave);
+
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseover", onOver, true);
+      window.removeEventListener("mouseleave", onLeave);
+    };
+  }, []);
+
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none fixed left-0 top-0 z-[9999] hidden md:block"
+      style={{
+        transform: `translate3d(${pos.x}px, ${pos.y}px, 0)`,
+        opacity: visible ? 1 : 0,
+        transition: "opacity 150ms ease",
+      }}
+    >
+      <div
+        className="rounded-full"
+        style={{
+          width: hovering ? 40 : 12,
+          height: hovering ? 40 : 12,
+          background: "#FE5B04",
+          opacity: hovering ? 0.3 : 1,
+          transform: "translate(-50%, -50%)",
+          transition: "width 180ms ease, height 180ms ease, opacity 180ms ease",
+        }}
+      />
+    </div>
+  );
+}
 
 const clientLogos = [
   "Yves Rocher",
@@ -14,17 +159,17 @@ const clientLogos = [
 
 const problems = [
   {
-    icon: "↗",
+    icon: <TrendUp size={32} weight="light" color="#FE5B04" aria-hidden="true" />,
     title: "Vous payez du trafic qui ne convertit pas",
     desc: "Votre site n'est pas optimisé pour convertir. Vos visiteurs repartent les mains vides.",
   },
   {
-    icon: "◻",
+    icon: <ShoppingCart size={32} weight="light" color="#FE5B04" aria-hidden="true" />,
     title: "Votre design fait fuir avant le panier",
     desc: "Un design daté envoie le mauvais signal. Vos clients doutent avant même d'ajouter au panier.",
   },
   {
-    icon: "?",
+    icon: <Question size={32} weight="light" color="#FE5B04" aria-hidden="true" />,
     title: "Vous modifiez au hasard sans savoir ce qui bloque",
     desc: "Sans audit UX/UI, vous changez des détails au hasard depuis des mois.",
   },
@@ -57,21 +202,25 @@ const services = [
 const steps = [
   {
     number: "01",
+    icon: <MagnifyingGlass size={28} weight="thin" color="#FE5B04" aria-hidden="true" />,
     title: "Audit & Diagnostic",
     desc: "On décortique votre site : parcours d'achat, points de friction, comportement utilisateurs.",
   },
   {
     number: "02",
+    icon: <Strategy size={28} weight="thin" color="#FE5B04" aria-hidden="true" />,
     title: "Stratégie",
     desc: "Quick wins et chantiers à fort impact. Roadmap claire, pensée pour augmenter la conversion.",
   },
   {
     number: "03",
+    icon: <FigmaLogo size={28} weight="thin" color="#FE5B04" aria-hidden="true" />,
     title: "Design UX/UI",
     desc: "Maquettes Figma, prototypage, design system. Tout prêt pour votre équipe dev.",
   },
   {
     number: "04",
+    icon: <ChartLine size={28} weight="thin" color="#FE5B04" aria-hidden="true" />,
     title: "Mesure & Optimisation",
     desc: "Fichiers clean, composants organisés, documentation incluse. On itère ce qui bloque vraiment.",
   },
@@ -136,6 +285,33 @@ export default function Home() {
   const singleWidthRef = useRef(0);
   const offsetRef = useRef(0);
 
+  const caseStudies = useMemo(
+    () => [
+      {
+        slug: "cuure",
+        client: "Cuure",
+        category: "Compléments personnalisés",
+        year: "2026",
+        title: "Refonte du parcours d’achat (PDP → checkout)",
+      },
+      {
+        slug: "yves-rocher",
+        client: "Yves Rocher",
+        category: "Cosmétiques",
+        year: "2023",
+        title: "Refonte UX multi-marchés (pages clés + tunnel)",
+      },
+      {
+        slug: "juliette-has-a-gun",
+        client: "Juliette Has A Gun",
+        category: "Parfumerie de niche",
+        year: "2025",
+        title: "Modernisation UI + optimisation conversion PDP",
+      },
+    ],
+    []
+  );
+
   useEffect(() => {
     const measure = () => {
       const el = marqueeInnerRef.current;
@@ -176,20 +352,35 @@ export default function Home() {
 
   return (
     <main className="bg-white text-black font-sans antialiased overflow-x-hidden">
+      <CustomCursor />
       <Navbar />
 
       {/* Hero */}
       <section className="pt-32 pb-20 px-6 max-w-6xl mx-auto">
         <div className="flex flex-col items-start gap-8 max-w-3xl">
-          <div className="flex items-center gap-3 bg-black/5 rounded-full px-4 py-2 text-sm font-medium">
-            <span className="font-semibold">4.9/5</span>
-            <span className="text-black/40">-</span>
-            <span className="text-black/60">+100 clients</span>
+          <div className="flex flex-wrap items-center gap-3 bg-black/5 rounded-2xl px-4 py-3 text-sm font-medium">
+            <span className="inline-flex items-center gap-2">
+              <span className="text-black/40">Note</span>
+              <CountUp value={4.9} decimals={1} className="font-semibold" />
+              <span className="text-black/40">/5</span>
+            </span>
+            <span className="text-black/30">•</span>
+            <span className="inline-flex items-center gap-2">
+              <CountUp value={100} prefix="+" className="font-semibold" />
+              <span className="text-black/60">clients</span>
+            </span>
+            <span className="text-black/30">•</span>
+            <span className="inline-flex items-center gap-2">
+              <CountUp value={50} prefix="+" className="font-semibold" />
+              <span className="text-black/60">refontes</span>
+            </span>
           </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.05]">
-            Consultant UX/UI & CRO E-commerce <span className="text-black/30">— LeStudio</span>
-          </h1>
+          <FadeUp>
+            <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight leading-[1.05]">
+              Consultant UX/UI & CRO E-commerce <span className="text-black/30">— LeStudio</span>
+            </h1>
+          </FadeUp>
 
           <p className="text-lg md:text-xl text-black/60 max-w-xl leading-relaxed">
             On transforme vos visiteurs en clients. Design Figma livré en 7 jours, optimisé pour convertir, prêt à intégrer.
@@ -198,13 +389,13 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-3">
             <a
               href="#audit"
-              className="bg-black text-white font-semibold px-7 py-4 rounded-full hover:bg-black/80 transition-colors text-center"
+              className="btn-primary text-center"
             >
               Obtenir mon audit CRO offert
             </a>
             <a
               href="#realisations"
-              className="border border-black/20 font-semibold px-7 py-4 rounded-full hover:bg-black/5 transition-colors text-center"
+              className="btn-secondary text-center"
             >
               Voir les réalisations
             </a>
@@ -234,24 +425,81 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Cas d’études */}
+      <section className="py-24 px-6 max-w-6xl mx-auto">
+        <div className="mb-12">
+          <p className="text-sm font-semibold uppercase tracking-widest text-black/40 mb-3">
+            Cas d&apos;études
+          </p>
+          <FadeUp>
+            <h2 className="font-display text-3xl md:text-4xl font-bold max-w-2xl">
+              Des projets e-commerce livrés vite, pensés pour convertir.
+            </h2>
+          </FadeUp>
+        </div>
+
+        <div className="space-y-4">
+          {caseStudies.map((cs) => (
+            <a
+              key={cs.slug}
+              href={`/cas-etudes/${cs.slug}`}
+              className="group block rounded-2xl border border-black/10 bg-white p-7 md:p-9 transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg"
+            >
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                <div>
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-sm">
+                    <span className="font-bold">{cs.client}</span>
+                    <span className="text-black/20">•</span>
+                    <span className="text-black/60">{cs.category}</span>
+                    <span className="text-black/20">•</span>
+                    <span className="text-black/50">{cs.year}</span>
+                  </div>
+                  <div className="mt-3 text-lg md:text-xl font-semibold text-black/80">
+                    {cs.title}
+                  </div>
+                </div>
+                <div className="text-sm font-semibold text-black/50 group-hover:text-black transition-colors">
+                  <span className="inline-flex items-center gap-2">
+                    Voir le projet
+                    <ArrowRight size={16} weight="regular" aria-hidden="true" />
+                  </span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+
       {/* Problèmes */}
       <section className="py-24 px-6 max-w-6xl mx-auto">
         <div className="mb-12">
           <p className="text-sm font-semibold uppercase tracking-widest text-black/40 mb-3">Problèmes</p>
-          <h2 className="text-3xl md:text-4xl font-bold max-w-xl">
-            Trois freins qui réduisent vos ventes dès le premier mois.
-          </h2>
+          <FadeUp>
+            <h2 className="font-display text-3xl md:text-4xl font-bold max-w-xl">
+              Trois freins qui réduisent vos ventes dès le premier mois.
+            </h2>
+          </FadeUp>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <motion.div
+          className="grid md:grid-cols-3 gap-6"
+          variants={STAGGER_CONTAINER}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {problems.map((p) => (
-            <div key={p.title} className="bg-black/[0.03] rounded-2xl p-8 border border-black/5">
-              <div className="text-2xl mb-4">{p.icon}</div>
+            <motion.div
+              key={p.title}
+              variants={STAGGER_ITEM}
+              className="bg-black/[0.03] rounded-2xl p-8 border border-black/5"
+            >
+              <div className="mb-4">{p.icon}</div>
               <h3 className="font-bold text-lg mb-3">{p.title}</h3>
               <p className="text-black/60 text-sm leading-relaxed">{p.desc}</p>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* Services */}
@@ -259,22 +507,37 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-12">
             <p className="text-sm font-semibold uppercase tracking-widest text-black/40 mb-3">Nos services</p>
-            <h2 className="text-3xl md:text-4xl font-bold">Ce qu’on fait pour vous.</h2>
+            <FadeUp>
+              <h2 className="font-display text-3xl md:text-4xl font-bold">Ce qu’on fait pour vous.</h2>
+            </FadeUp>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <motion.div
+            className="grid md:grid-cols-3 gap-6"
+            variants={STAGGER_CONTAINER}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {services.map((s) => (
-              <div
+              <motion.div
                 key={s.number}
+                variants={STAGGER_ITEM}
                 className="bg-white rounded-2xl p-8 border border-black/10 hover:border-black/20 transition-colors"
               >
                 <span className="text-black/30 text-sm font-mono">{s.number}</span>
                 <h3 className="text-xl font-bold mt-4 mb-3">{s.title}</h3>
                 <p className="text-black/60 text-sm leading-relaxed mb-6">{s.description}</p>
-                <p className="font-bold text-black">{s.price}</p>
-              </div>
+                <div className="flex items-center justify-between gap-4">
+                  <p className="font-bold text-black">{s.price}</p>
+                  <span className="inline-flex items-center gap-2 text-xs font-semibold text-black/60">
+                    <Check size={14} weight="bold" color="#FE5B04" aria-hidden="true" />
+                    Inclus
+                  </span>
+                </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -282,14 +545,19 @@ export default function Home() {
       <section className="py-24 px-6 max-w-6xl mx-auto">
         <div className="mb-12">
           <p className="text-sm font-semibold uppercase tracking-widest text-black/40 mb-3">Méthode</p>
-          <h2 className="text-3xl md:text-4xl font-bold">4 étapes pour booster vos ventes.</h2>
+          <FadeUp>
+            <h2 className="font-display text-3xl md:text-4xl font-bold">4 étapes pour booster vos ventes.</h2>
+          </FadeUp>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((s) => (
             <div key={s.number} className="rounded-2xl border border-black/10 bg-white">
               <div className="p-8 border-t-2 border-black">
-                <span className="text-4xl font-bold text-black/10">{s.number}</span>
+                <div className="flex items-start justify-between gap-4">
+                  <span className="text-4xl font-bold text-black/10">{s.number}</span>
+                  <div className="shrink-0">{s.icon}</div>
+                </div>
                 <h3 className="font-bold mt-4 mb-2">{s.title}</h3>
                 <p className="text-black/60 text-sm leading-relaxed">{s.desc}</p>
               </div>
@@ -302,29 +570,43 @@ export default function Home() {
       <section className="py-24 px-6 max-w-6xl mx-auto">
         <div className="mb-12">
           <p className="text-sm font-semibold uppercase tracking-widest text-black/40 mb-3">Témoignages</p>
-          <h2 className="text-3xl md:text-4xl font-bold">Ce qu’en disent nos clients.</h2>
+          <FadeUp>
+            <h2 className="font-display text-3xl md:text-4xl font-bold">Ce qu’en disent nos clients.</h2>
+          </FadeUp>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <motion.div
+          className="grid md:grid-cols-2 gap-6"
+          variants={STAGGER_CONTAINER}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {testimonials.map((t) => (
-            <div key={`${t.name}-${t.role}`} className="border border-black/10 rounded-2xl p-8 bg-white">
+            <motion.div
+              key={`${t.name}-${t.role}`}
+              variants={STAGGER_ITEM}
+              className="border border-black/10 rounded-2xl p-8 bg-white"
+            >
               <p className="text-black/70 leading-relaxed mb-6 text-sm">"{t.quote}"</p>
               <div>
                 <p className="font-bold text-sm">{t.name}</p>
                 <p className="text-black/40 text-xs">{t.role}</p>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* Pourquoi nous */}
       <section className="py-24 px-6 max-w-6xl mx-auto">
         <div className="mb-12">
           <p className="text-sm font-semibold uppercase tracking-widest text-black/40 mb-3">Pourquoi nous ?</p>
-          <h2 className="text-3xl md:text-4xl font-bold max-w-xl">
-            Design et CRO : la combinaison qui fait monter la conversion.
-          </h2>
+          <FadeUp>
+            <h2 className="font-display text-3xl md:text-4xl font-bold max-w-xl">
+              Design et CRO : la combinaison qui fait monter la conversion.
+            </h2>
+          </FadeUp>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
@@ -345,83 +627,38 @@ export default function Home() {
       {/* CTA final */}
       <section id="audit" className="py-24 px-6 bg-black text-white">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Réservez votre audit CRO offert</h2>
+          <FadeUp>
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
+              Réservez votre audit CRO offert
+            </h2>
+          </FadeUp>
           <p className="text-white/60 text-lg mb-4">Augmentez votre CA sans augmenter votre budget publicitaire.</p>
 
           <ul className="text-white/60 text-sm mb-10 space-y-2">
-            <li>✓ Résultats visibles avant la fin du premier mois</li>
-            <li>✓ Design livré en 7 jours</li>
-            <li>✓ Sans engagement</li>
+            <li className="flex items-center justify-center gap-2">
+              <Check size={14} weight="bold" color="#FE5B04" aria-hidden="true" />
+              Résultats visibles avant la fin du premier mois
+            </li>
+            <li className="flex items-center justify-center gap-2">
+              <Check size={14} weight="bold" color="#FE5B04" aria-hidden="true" />
+              Design livré en 7 jours
+            </li>
+            <li className="flex items-center justify-center gap-2">
+              <Check size={14} weight="bold" color="#FE5B04" aria-hidden="true" />
+              Sans engagement
+            </li>
           </ul>
 
           <a
             href="mailto:contact@lestudiodesign.fr"
-            className="bg-white text-black font-bold px-10 py-5 rounded-full hover:bg-white/90 transition-colors inline-block text-lg"
+            className="btn-primary inline-block text-lg"
           >
             Obtenir mon audit CRO offert
           </a>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-black text-white border-t border-white/10 py-12 px-6">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-8">
-          <div className="md:col-span-2">
-            <p className="text-xl font-bold mb-3">LeStudio</p>
-            <p className="text-white/40 text-sm mb-4">Agence UX/UI & CRO spécialisée e-commerce DTC</p>
-            <a
-              href="mailto:contact@lestudiodesign.fr"
-              className="text-white/60 text-sm hover:text-white transition-colors"
-            >
-              contact@lestudiodesign.fr
-            </a>
-            <div className="mt-4 flex gap-4">
-              <a
-                href="https://www.linkedin.com/in/sacha-vetzikian/"
-                className="text-white/40 hover:text-white text-sm transition-colors"
-              >
-                LinkedIn
-              </a>
-              <a
-                href="https://www.instagram.com/sachavetzikian/"
-                className="text-white/40 hover:text-white text-sm transition-colors"
-              >
-                Instagram
-              </a>
-              <a
-                href="https://x.com/Sacha_Vetzikian"
-                className="text-white/40 hover:text-white text-sm transition-colors"
-              >
-                X
-              </a>
-            </div>
-          </div>
-
-          <div>
-            <p className="font-semibold mb-4 text-sm">Liens</p>
-            <div className="flex flex-col gap-2 text-white/40 text-sm">
-              <a href="#realisations" className="hover:text-white transition-colors">Réalisations</a>
-              <a href="#services" className="hover:text-white transition-colors">Services</a>
-              <a href="#audit" className="hover:text-white transition-colors">Audit CRO offert</a>
-              <a href="#blog" className="hover:text-white transition-colors">Blog</a>
-            </div>
-          </div>
-
-          <div>
-            <p className="font-semibold mb-4 text-sm">Légal</p>
-            <div className="flex flex-col gap-2 text-white/40 text-sm">
-              <a href="/cgv" className="hover:text-white transition-colors">CGV</a>
-              <a href="/mentions-legales" className="hover:text-white transition-colors">Mentions légales</a>
-            </div>
-          </div>
-        </div>
-
-        <div id="blog" className="h-px" aria-hidden="true" />
-
-        <div className="max-w-6xl mx-auto mt-10 pt-6 border-t border-white/10 text-white/30 text-xs">
-          © 2026 LeStudio — Tous droits réservés
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }

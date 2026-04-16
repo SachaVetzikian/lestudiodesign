@@ -1,16 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const SITE_URL = "https://lestudiodesign.fr";
 const title = "Consultant UX/UI & CRO E-commerce — LeStudio";
@@ -83,11 +72,8 @@ export default function RootLayout({
   };
 
   return (
-    <html
-      lang="fr"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col bg-white text-black">
+    <html lang="fr" className="h-full antialiased">
+      <body className="font-sans">
         <script
           type="application/ld+json"
           // Next.js ne fournit pas de DSL pour JSON-LD : on injecte directement le script.

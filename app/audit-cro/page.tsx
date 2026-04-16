@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { AuditCroLeadForm } from "./AuditCroLeadForm";
 import { Navbar } from "@/app/components/Navbar";
+import { Footer } from "@/app/components/Footer";
+import { IconCheck } from "@/app/components/Icons";
 
 export const metadata: Metadata = {
   title: "Audit CRO e-commerce offert — LeStudio",
@@ -57,15 +59,21 @@ export default function AuditCroLeadPage() {
                 <h2 className="text-lg font-bold">Ce qui est inclus</h2>
                 <ul className="mt-4 space-y-3 text-black/60 text-sm md:text-base">
                   <li className="flex gap-3">
-                    <span className="font-bold text-black">✓</span>
+                    <span className="mt-0.5">
+                      <IconCheck />
+                    </span>
                     Analyse du parcours (pages clés → panier → checkout)
                   </li>
                   <li className="flex gap-3">
-                    <span className="font-bold text-black">✓</span>
+                    <span className="mt-0.5">
+                      <IconCheck />
+                    </span>
                     Benchmark concurrents (signaux de confiance, offre, UX)
                   </li>
                   <li className="flex gap-3">
-                    <span className="font-bold text-black">✓</span>
+                    <span className="mt-0.5">
+                      <IconCheck />
+                    </span>
                     3 recommandations prioritaires (quick wins)
                   </li>
                 </ul>
@@ -85,13 +93,13 @@ export default function AuditCroLeadPage() {
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <a
                 href="#form"
-                className="bg-black text-white font-semibold px-7 py-4 rounded-full hover:bg-black/80 transition-colors text-center"
+                className="btn-primary text-center"
               >
                 Obtenir mon audit gratuit
               </a>
               <a
                 href="/cas-etudes"
-                className="border border-black/20 font-semibold px-7 py-4 rounded-full hover:bg-black/5 transition-colors text-center"
+                className="btn-secondary text-center"
               >
                 Voir des réalisations
               </a>
@@ -120,7 +128,7 @@ export default function AuditCroLeadPage() {
             <div className="flex md:justify-end">
               <a
                 href="#form"
-                className="bg-white text-black font-bold px-8 py-4 rounded-full hover:bg-white/90 transition-colors inline-flex items-center justify-center w-full md:w-auto"
+                className="btn-primary inline-flex items-center justify-center w-full md:w-auto"
               >
                 Obtenir mon audit gratuit
               </a>
@@ -133,6 +141,7 @@ export default function AuditCroLeadPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
       />
+      <Footer />
     </main>
   );
 }

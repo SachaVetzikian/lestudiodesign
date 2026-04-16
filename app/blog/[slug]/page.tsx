@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Navbar } from "@/app/components/Navbar";
+import { Footer } from "@/app/components/Footer";
+import { IconArrowRight } from "@/app/components/Icons";
 import {
   AUTHOR_NAME,
   AUTHOR_TITLE,
@@ -281,7 +283,7 @@ export default async function BlogArticleTemplatePage({
                 </div>
                 <Link
                   href="/audit-cro"
-                  className="inline-flex bg-black text-white font-semibold px-7 py-4 rounded-full hover:bg-black/80 transition-colors justify-center"
+                  className="btn-primary justify-center"
                 >
                   Obtenir mon audit gratuit
                 </Link>
@@ -323,7 +325,7 @@ export default async function BlogArticleTemplatePage({
                   href={`/blog/${p.slug}`}
                   className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-black hover:opacity-70 transition-opacity"
                 >
-                  Lire l&apos;article <span aria-hidden="true">→</span>
+                  Lire l&apos;article <IconArrowRight />
                 </Link>
               </div>
             </article>
@@ -341,19 +343,20 @@ export default async function BlogArticleTemplatePage({
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/audit-cro"
-              className="bg-white text-black font-bold px-10 py-5 rounded-full hover:bg-white/90 transition-colors inline-block text-lg"
+              className="btn-primary inline-block text-lg"
             >
               Obtenir mon audit gratuit
             </Link>
             <Link
               href="/services/audit-cro"
-              className="border border-white/20 text-white font-semibold px-10 py-5 rounded-full hover:bg-white/5 transition-colors inline-block text-lg"
+              className="btn-secondary inline-block text-lg"
             >
               Voir l&apos;offre Audit CRO
             </Link>
           </div>
         </div>
       </section>
+      <Footer />
     </main>
   );
 }

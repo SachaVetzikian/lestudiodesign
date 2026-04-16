@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/app/components/Navbar";
+import { Footer } from "@/app/components/Footer";
 
 export const metadata: Metadata = {
   title: "LeStudio — Studio UX/UI & CRO E-commerce",
@@ -169,13 +170,13 @@ export default function AgencePage() {
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
             <a
               href="/audit-cro"
-              className="bg-white text-black font-bold px-10 py-5 rounded-full hover:bg-white/90 transition-colors inline-block text-lg"
+              className="btn-primary inline-block text-lg"
             >
               Travailler avec nous
             </a>
             <a
               href="/cas-etudes"
-              className="border border-white/20 text-white font-semibold px-10 py-5 rounded-full hover:bg-white/5 transition-colors inline-block text-lg"
+              className="btn-secondary inline-block text-lg"
             >
               Voir des cas d’études
             </a>
@@ -187,6 +188,7 @@ export default function AgencePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
       />
+      <Footer />
     </main>
   );
 }

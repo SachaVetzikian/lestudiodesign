@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/app/components/Navbar";
+import { Footer } from "@/app/components/Footer";
+import Link from "next/link";
+import { IconArrowRight } from "@/app/components/Icons";
 
 export const metadata: Metadata = {
   title: "Cas d'études E-commerce — Refontes UX/UI & CRO | LeStudio",
@@ -15,42 +18,42 @@ const cases = [
     category: "Compléments alimentaires",
     year: "2026",
     description: "Refonte du parcours d’achat",
-    href: "#cuure",
+    href: "/cas-etudes/cuure",
   },
   {
     name: "Caalme",
     category: "Patchs bien-être",
     year: "2026",
     description: "Refonte UX/UI e-commerce",
-    href: "#caalme",
+    href: "/cas-etudes/caalme",
   },
   {
     name: "Juliette Has A Gun",
     category: "Parfumerie",
     year: "2025",
     description: "Refonte UX/UI e-commerce",
-    href: "#juliette-has-a-gun",
+    href: "/cas-etudes/juliette-has-a-gun",
   },
   {
     name: "Apoticaria",
     category: "Compléments",
     year: "2025",
     description: "Refonte de la page produit",
-    href: "#apoticaria",
+    href: "/cas-etudes/apoticaria",
   },
   {
     name: "Riviera Club",
     category: "Accessoires luxe",
     year: "2025",
     description: "Création du site e-commerce",
-    href: "#riviera-club",
+    href: "/cas-etudes/riviera-club",
   },
   {
     name: "Yves Rocher",
     category: "Cosmétiques",
     year: "2023",
     description: "Refonte UX/UI e-commerce",
-    href: "#yves-rocher",
+    href: "/cas-etudes/yves-rocher",
   },
 ];
 
@@ -61,7 +64,7 @@ const itemListSchema = {
     "@type": "ListItem",
     position: index + 1,
     name: c.name,
-    url: `${SITE_URL}/cas-etudes${c.href}`,
+    url: `${SITE_URL}${c.href}`,
   })),
 };
 
@@ -90,7 +93,6 @@ export default function CaseStudiesPage() {
           {cases.map((p) => (
             <article
               key={p.name}
-              id={p.href.replace("#", "")}
               className="bg-white rounded-2xl p-8 border border-black/10 hover:border-black/20 transition-colors group"
             >
               <div className="flex items-start justify-between gap-4 mb-6">
@@ -111,12 +113,12 @@ export default function CaseStudiesPage() {
                 {p.description}
               </p>
 
-              <a
+              <Link
                 href={p.href}
                 className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-black hover:opacity-70 transition-opacity"
               >
-                Voir le projet <span aria-hidden="true">→</span>
-              </a>
+                Voir le projet <IconArrowRight />
+              </Link>
             </article>
           ))}
         </div>
@@ -130,13 +132,13 @@ export default function CaseStudiesPage() {
           <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
             <a
               href="/services/audit-cro#cta"
-              className="bg-white text-black font-bold px-10 py-5 rounded-full hover:bg-white/90 transition-colors inline-block text-lg"
+              className="btn-primary inline-block text-lg"
             >
               Obtenir mon audit offert
             </a>
             <a
               href="/services/refonte-ux-ui#cta"
-              className="border border-white/20 text-white font-semibold px-10 py-5 rounded-full hover:bg-white/5 transition-colors inline-block text-lg"
+              className="btn-secondary inline-block text-lg"
             >
               Voir la refonte UX/UI
             </a>
@@ -148,6 +150,7 @@ export default function CaseStudiesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
       />
+      <Footer />
     </main>
   );
 }

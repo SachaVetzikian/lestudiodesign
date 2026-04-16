@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { ArrowRight } from "@phosphor-icons/react";
 import { useMemo, useState } from "react";
 
 import type { BlogCategory, BlogPost } from "./_shared";
@@ -107,9 +108,9 @@ export function BlogClient({
                 <div className="mt-8">
                   <Link
                     href={`/blog/${featured.slug}`}
-                    className="inline-flex items-center gap-2 bg-black text-white font-semibold px-7 py-4 rounded-full hover:bg-black/80 transition-colors"
+                    className="btn-primary inline-flex items-center gap-2"
                   >
-                    Lire l&apos;article <span aria-hidden="true">→</span>
+                    Lire l&apos;article <ArrowRight size={16} weight="regular" aria-hidden="true" />
                   </Link>
                 </div>
               </div>
@@ -181,7 +182,7 @@ export function BlogClient({
                   href={`/blog/${p.slug}`}
                   className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-black hover:opacity-70 transition-opacity"
                 >
-                  Lire l&apos;article <span aria-hidden="true">→</span>
+                  Lire l&apos;article <ArrowRight size={16} weight="regular" aria-hidden="true" />
                 </Link>
               </div>
             </article>
@@ -215,7 +216,7 @@ export function BlogClient({
               />
               <button
                 type="submit"
-                className="rounded-full px-7 py-4 bg-white/10 border border-white/20 text-white font-semibold hover:bg-white/15 transition-colors"
+                className="btn-secondary"
               >
                 S&apos;inscrire
               </button>

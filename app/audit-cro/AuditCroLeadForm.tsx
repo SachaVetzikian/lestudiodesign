@@ -140,7 +140,7 @@ export function AuditCroLeadForm() {
 
       <button
         type="submit"
-        className="mt-6 w-full bg-black text-white font-semibold px-7 py-4 rounded-full hover:bg-black/80 transition-colors text-center"
+        className="mt-6 w-full btn-primary text-center"
       >
         Obtenir mon audit gratuit
       </button>

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/app/components/Navbar";
+import { Footer } from "@/app/components/Footer";
+import { IconCheck, IconMinus, IconPlus } from "@/app/components/Icons";
 
 export const metadata: Metadata = {
   title: "Optimisation CRO e-commerce — Abonnement mensuel | LeStudio",
@@ -74,13 +76,13 @@ export default function OptimisationCroPage() {
           <div className="flex flex-col sm:flex-row gap-3 mt-7">
             <a
               href="#cta"
-              className="bg-black text-white font-semibold px-7 py-4 rounded-full hover:bg-black/80 transition-colors text-center"
+              className="btn-primary text-center"
             >
               Démarrer
             </a>
             <a
               href="#faq"
-              className="border border-black/20 font-semibold px-7 py-4 rounded-full hover:bg-black/5 transition-colors text-center"
+              className="btn-secondary text-center"
             >
               Voir la FAQ
             </a>
@@ -118,19 +120,27 @@ export default function OptimisationCroPage() {
             <h2 className="text-2xl md:text-3xl font-bold">Cadence mensuelle</h2>
             <ul className="mt-4 space-y-3 text-white/70 text-sm md:text-base">
               <li className="flex gap-3">
-                <span className="font-bold text-white">✓</span>
+                <span className="mt-0.5">
+                  <IconCheck />
+                </span>
                 Hypothèses et priorisation (impact x effort)
               </li>
               <li className="flex gap-3">
-                <span className="font-bold text-white">✓</span>
+                <span className="mt-0.5">
+                  <IconCheck />
+                </span>
                 Conception des variantes (UX/UI)
               </li>
               <li className="flex gap-3">
-                <span className="font-bold text-white">✓</span>
+                <span className="mt-0.5">
+                  <IconCheck />
+                </span>
                 Mise en place / suivi des tests (selon stack)
               </li>
               <li className="flex gap-3">
-                <span className="font-bold text-white">✓</span>
+                <span className="mt-0.5">
+                  <IconCheck />
+                </span>
                 Analyse et itérations pour le prochain cycle
               </li>
             </ul>
@@ -177,14 +187,21 @@ export default function OptimisationCroPage() {
         </div>
 
         <div className="rounded-2xl border border-black/10 bg-white p-7">
-          <div className="space-y-6">
+          <div className="space-y-3">
             {faq.map((item) => (
-              <div key={item.q} className="pt-2">
-                <h3 className="font-bold text-lg">{item.q}</h3>
-                <p className="text-black/60 text-sm md:text-base mt-2 leading-relaxed">
-                  {item.a}
-                </p>
-              </div>
+              <details
+                key={item.q}
+                className="group rounded-xl border border-black/10 bg-white px-5 py-4"
+              >
+                <summary className="cursor-pointer list-none flex items-center justify-between gap-4">
+                  <h3 className="font-bold text-base md:text-lg">{item.q}</h3>
+                  <span className="shrink-0 text-black/60">
+                    <IconPlus className="group-open:hidden" />
+                    <IconMinus className="hidden group-open:block" />
+                  </span>
+                </summary>
+                <p className="text-black/60 text-sm md:text-base mt-3 leading-relaxed">{item.a}</p>
+              </details>
             ))}
           </div>
         </div>
@@ -210,19 +227,20 @@ export default function OptimisationCroPage() {
               )}&body=${encodeURIComponent(
                 "Bonjour,\n\nJe souhaite démarrer une optimisation CRO e-commerce (abonnement mensuel).\n\nLien de mon site : \nObjectif principal : \nStack / outils (si applicable) : \n\nMerci."
               )}`}
-              className="bg-white text-black font-bold px-10 py-5 rounded-full hover:bg-white/90 transition-colors inline-block text-lg"
+              className="btn-primary inline-block text-lg"
             >
               Démarrer
             </a>
             <a
               href="/"
-              className="border border-white/20 text-white font-semibold px-10 py-5 rounded-full hover:bg-white/5 transition-colors inline-block text-lg"
+              className="btn-secondary inline-block text-lg"
             >
               Voir LeStudio
             </a>
           </div>
         </div>
       </section>
+      <Footer />
     </main>
   );
 }
