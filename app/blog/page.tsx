@@ -1,181 +1,130 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/app/components/Navbar";
+import { BlogClient, type BlogPost } from "./BlogClient";
 
 export const metadata: Metadata = {
   title: "Blog CRO & UX e-commerce | LeStudio",
   description:
-    "Blog CRO & UX e-commerce : guides, méthodes et best practices pour améliorer la conversion Shopify et l’expérience utilisateur.",
+    "Blog CRO & UX e-commerce : conseils actionnables pour augmenter votre taux de conversion (Shopify, UX, CRO, A/B testing).",
 };
 
 const SITE_URL = "https://lestudiodesign.fr";
 
-const posts = [
+const AUTHOR_NAME = "Sacha Vetzikian";
+
+const featured: BlogPost = {
+  slug: "audit-cro-ecommerce-guide-complet-2026",
+  title: "Audit CRO E-commerce : le guide complet 2026",
+  category: "CRO",
+  dateISO: "2026-02-12",
+  readingTimeMin: 9,
+  excerpt:
+    "Méthode, pages à analyser, priorisation et quick wins : tout ce qu’il faut pour identifier ce qui bloque vos ventes et augmenter la conversion.",
+  author: AUTHOR_NAME,
+};
+
+const posts: BlogPost[] = [
+  featured,
   {
-    title: "Comment améliorer son taux de conversion Shopify en 2025",
+    slug: "ameliorer-taux-conversion-shopify",
+    title: "Comment améliorer son taux de conversion Shopify",
     category: "Shopify",
-    date: "2025-01-18",
+    dateISO: "2026-01-23",
+    readingTimeMin: 7,
     excerpt:
-      "Les leviers CRO concrets pour augmenter la conversion : hiérarchie, preuve sociale, vitesse, pages clés et tunnel d’achat.",
-    href: "#conversion-shopify-2025",
+      "Les leviers CRO les plus rentables sur Shopify : messages, preuve sociale, vitesse, CTA et pages clés du parcours d’achat.",
+    author: AUTHOR_NAME,
   },
   {
-    title: "Audit CRO e-commerce : le guide complet",
-    category: "Audit CRO",
-    date: "2025-02-06",
-    excerpt:
-      "Comment structurer un audit CRO e-commerce : pages à analyser, priorisation, quick wins et plan d’action orienté revenus.",
-    href: "#audit-cro-guide-complet",
-  },
-  {
+    slug: "ux-ecommerce-10-erreurs",
     title: "UX e-commerce : les 10 erreurs qui tuent vos ventes",
-    category: "UX",
-    date: "2025-03-12",
+    category: "UX Design",
+    dateISO: "2026-01-08",
+    readingTimeMin: 6,
     excerpt:
-      "Les erreurs UX qui bloquent la conversion (et comment les corriger) : navigation, PDP, confiance, checkout et friction.",
-    href: "#ux-erreurs-ventes",
+      "Navigation, PDP, confiance, checkout : les frictions UX qui font chuter la conversion — et les corrections prioritaires.",
+    author: AUTHOR_NAME,
   },
   {
-    title: "A/B testing Shopify : par où commencer",
-    category: "A/B testing",
-    date: "2025-04-03",
+    slug: "ab-testing-shopify-par-ou-commencer",
+    title: "A/B testing : par où commencer sur Shopify",
+    category: "A/B Testing",
+    dateISO: "2025-12-18",
+    readingTimeMin: 5,
     excerpt:
-      "Une méthode simple pour lancer vos premiers tests A/B sur Shopify : hypothèses, priorisation, métriques, et cadence.",
-    href: "#ab-testing-shopify-commencer",
+      "Une méthode simple pour lancer vos premiers tests : hypothèses, priorisation, métriques et cadence d’itération.",
+    author: AUTHOR_NAME,
   },
   {
+    slug: "fiche-produit-best-practices-cro",
     title: "Fiche produit e-commerce : les best practices CRO",
     category: "CRO",
-    date: "2025-05-21",
+    dateISO: "2025-11-27",
+    readingTimeMin: 8,
     excerpt:
-      "Les best practices CRO pour vos fiches produit : proposition de valeur, bénéfices, preuves, objections et CTA.",
-    href: "#fiche-produit-best-practices",
+      "Proposition de valeur, bénéfices, preuves, objections et CTA : structurez une PDP qui convertit mieux.",
+    author: AUTHOR_NAME,
   },
   {
-    title: "Tunnel d'achat Shopify : comment réduire l'abandon panier",
-    category: "Checkout",
-    date: "2025-06-10",
+    slug: "tunnel-achat-shopify-reduire-abandon-panier",
+    title: "Tunnel d'achat Shopify : réduire l'abandon panier",
+    category: "Shopify",
+    dateISO: "2025-10-09",
+    readingTimeMin: 7,
     excerpt:
-      "Réduire l’abandon panier : clarté des frais, réassurance, moyens de paiement, frictions et micro-copies du tunnel d’achat.",
-    href: "#tunnel-achat-abandon-panier",
+      "Frais, réassurance, paiement, frictions : les optimisations concrètes pour réduire l’abandon et augmenter la conversion.",
+    author: AUTHOR_NAME,
+  },
+  {
+    slug: "combien-coute-audit-cro-ecommerce",
+    title: "Combien coûte un audit CRO e-commerce ?",
+    category: "CRO",
+    dateISO: "2025-09-03",
+    readingTimeMin: 4,
+    excerpt:
+      "Les facteurs qui font varier le prix d’un audit CRO e-commerce et comment choisir le bon périmètre pour un ROI rapide.",
+    author: AUTHOR_NAME,
   },
 ];
 
-const blogSchema = {
+const blogPostingSchemas = posts.map((p) => ({
   "@context": "https://schema.org",
-  "@type": "Blog",
-  name: "Blog CRO & UX e-commerce — LeStudio",
-  url: `${SITE_URL}/blog`,
-  inLanguage: "fr-FR",
+  "@type": "BlogPosting",
+  headline: p.title,
+  description: p.excerpt,
+  datePublished: p.dateISO,
+  dateModified: p.dateISO,
+  author: {
+    "@type": "Person",
+    name: p.author,
+  },
   publisher: {
     "@type": "Organization",
     name: "LeStudio",
     url: SITE_URL,
   },
-  blogPost: posts.map((p) => ({
-    "@type": "BlogPosting",
-    headline: p.title,
-    datePublished: p.date,
-    dateModified: p.date,
-    about: p.category,
-    url: `${SITE_URL}/blog${p.href}`,
-    isPartOf: {
-      "@type": "Blog",
-      name: "Blog CRO & UX e-commerce — LeStudio",
-      url: `${SITE_URL}/blog`,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "LeStudio",
-      url: SITE_URL,
-    },
-  })),
-};
-
-function formatDate(iso: string) {
-  const d = new Date(iso);
-  return d.toLocaleDateString("fr-FR", {
-    year: "numeric",
-    month: "long",
-    day: "2-digit",
-  });
-}
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": `${SITE_URL}/blog/${p.slug}`,
+  },
+  url: `${SITE_URL}/blog/${p.slug}`,
+  about: p.category,
+}));
 
 export default function BlogPage() {
   return (
     <main className="bg-white text-black font-sans antialiased overflow-x-hidden">
       <Navbar />
+      <BlogClient featured={featured} posts={posts} />
 
-      <section className="pt-28 pb-10 px-6 max-w-6xl mx-auto">
-        <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-widest text-black/40 mb-4">
-            CRO & UX e-commerce
-          </p>
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.05]">
-            Blog CRO & UX E-commerce
-          </h1>
-          <p className="text-lg md:text-xl text-black/60 mt-5 leading-relaxed">
-            Guides pratiques et best practices pour améliorer la conversion : audit CRO
-            e-commerce, UX, A/B testing Shopify, pages produit et tunnel d’achat.
-          </p>
-        </div>
-      </section>
-
-      <section className="px-6 pb-20 max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map((p) => (
-            <article
-              key={p.title}
-              id={p.href.replace("#", "")}
-              className="bg-white rounded-2xl p-8 border border-black/10 hover:border-black/20 transition-colors group"
-            >
-              <div className="flex items-start justify-between gap-4 mb-6">
-                <span className="text-xs font-semibold uppercase tracking-widest text-black/40">
-                  {p.category}
-                </span>
-                <time className="text-xs text-black/30" dateTime={p.date}>
-                  {formatDate(p.date)}
-                </time>
-              </div>
-
-              <h2 className="text-xl font-bold leading-snug">{p.title}</h2>
-              <p className="text-black/60 text-sm mt-3 leading-relaxed">{p.excerpt}</p>
-
-              <a
-                href={p.href}
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-black hover:opacity-70 transition-opacity"
-              >
-                Lire l'article <span aria-hidden="true">→</span>
-              </a>
-            </article>
-          ))}
-        </div>
-
-        <div className="mt-12 rounded-2xl bg-black text-white p-8 md:p-12 text-center">
-          <h2 className="text-3xl md:text-5xl font-bold">Besoin d’un audit CRO ?</h2>
-          <p className="text-white/60 text-lg mt-4 max-w-2xl mx-auto leading-relaxed">
-            Si vous voulez des recommandations prioritaires et actionnables, démarrez par un audit CRO e-commerce.
-          </p>
-          <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-            <a
-              href="/audit-cro"
-              className="bg-white text-black font-bold px-10 py-5 rounded-full hover:bg-white/90 transition-colors inline-block text-lg"
-            >
-              Obtenir mon audit gratuit
-            </a>
-            <a
-              href="/services/audit-cro"
-              className="border border-white/20 text-white font-semibold px-10 py-5 rounded-full hover:bg-white/5 transition-colors inline-block text-lg"
-            >
-              Voir l’offre Audit CRO
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
-      />
+      {blogPostingSchemas.map((schema, idx) => (
+        <script
+          // eslint-disable-next-line react/no-array-index-key
+          key={idx}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+      ))}
     </main>
   );
 }
